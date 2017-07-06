@@ -1,6 +1,8 @@
 from flask import Flask, request, make_response, redirect
+from flask.ext.script import Manager
 
 app = Flask(__name__)
+manager = Manager(app)
 
 
 @app.route('/')
@@ -38,4 +40,5 @@ def redirect(rtype):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    manager.run()
+    # app.run(debug=True)
