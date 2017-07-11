@@ -1,3 +1,14 @@
+def getreply():
+    if sys.stdin.isatty():
+        return input('?')
+    else:
+        if sys.platform[:3] == 'win':
+            pass
+        else:
+            key = open('/dev/tty').readline()[:-1]
+            return key
+
+
 def more(text: str, numlines: int = 15) -> None:
     lines = text.splitlines()
     while lines:
@@ -5,12 +16,14 @@ def more(text: str, numlines: int = 15) -> None:
         lines = lines[numlines:]
         for line in chunk:
             print(line)
-        if lines and input('More?') not in ['y', 'Y']:
+        if lines and getreply() not in ['y', 'Y']:
             break
 
 
 if __name__ == '__main__':
     import sys
-    if sys.argv.count() > 1:
+    if len(sys.argv) > 1:
         file_name = sys.argv[1]
         more(open(file_name).read(), 10)
+    else:
+        more(sys.stdin.read())
