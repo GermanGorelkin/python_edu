@@ -1,0 +1,21 @@
+[
+    {
+        "product_id": 123,
+        "promo": [
+            {
+                "begin_date": "06.05.2016",
+                "end_date": "12.05.2016",
+                "amount": 100,
+                "money": 1000.99
+            }
+        ],
+        "no_promo": [
+            {
+                "begin_date": "06.05.2016",
+                "end_date": "12.05.2016",
+                "amount": 100,
+                "money": 1000.99
+            }
+        ]
+    }
+]
