@@ -32,5 +32,5 @@ line_items = Table('line_items', metadata,
                    Column('quantity', Integer()),
                    Column('extended_cost', Numeric(12, 2))
                    )
-engine = create_engine('sqlite:///:memory:')
+engine = create_engine('sqlite:///:memory:', echo=True)
 metadata.create_all(engine)
