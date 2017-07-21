@@ -1,6 +1,6 @@
 import db
 import insert
-from sqlalchemy.sql import select
+from sqlalchemy.sql import select, desc
 
 
 def querying_data():
@@ -25,6 +25,23 @@ def querying_data():
     print(first_row[db.cookies.c.cookie_name])
 
 
+def ordering():
+    print('-' * 10)
+    s = select([db.cookies.c.cookie_name, db.cookies.c.quantity])
+    s = s.order_by(db.cookies.c.quantity)
+    rp = db.engine.execute(s)
+    for cookie in rp:
+        print('{} - {}'.format(cookie.quantity, cookie.cookie_name))
+
+    print('-' * 10)
+    s = select([db.cookies.c.cookie_name, db.cookies.c.quantity])
+    s = s.order_by(desc(db.cookies.c.quantity))
+    rp = db.engine.execute(s)
+    for cookie in rp:
+        print('{} - {}'.format(cookie.quantity, cookie.cookie_name))
+
+
 if __name__ == '__main__':
     insert.init_insert()
     querying_data()
+    ordering()
