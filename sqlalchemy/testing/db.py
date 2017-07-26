@@ -74,14 +74,14 @@ class LineItem(Base):
         return "LineItems(order_id={self.order_id}, " \
                "cookie_id={self.cookie_id}, " \
                "quantity={self.quantity}, " \
-               "extended_cost={self.extended_cost})".format(
-            self=self)
+               "extended_cost={self.extended_cost})".format(self=self)
 
 
 class DataAccessLayer:
     def __init__(self):
         self.engine = None
         self.session = None
+        self.Session = None
         self.conn_string = conn_string
 
     def connect(self):
