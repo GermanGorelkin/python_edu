@@ -1,5 +1,5 @@
-from db import engine, cookies
-import insert
+from .db import engine, cookies
+from . import insert
 from sqlalchemy.sql import select, desc, func, and_, or_, not_
 
 
