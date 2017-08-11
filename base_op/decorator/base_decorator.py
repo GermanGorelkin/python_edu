@@ -69,53 +69,59 @@
 #
 # @clock
 # def factorial(n):
-#     return 1 if n < 2 else n * factorial(n-1)
+#     if n < 2:
+#         return n
+#     return factorial(n-2) + factorial(n-1)
 # # factorial = clock(factorial)
 #
-# print('100! =', factorial(100))  # фактически вызываем clocked(100)
+# print('10! =', factorial(10))  # фактически вызываем clocked(100)
 
 ####################################################
 
-# import time
-#
-# DEFAULT_FMT = '[{elapsed:0.8f}s] {name} ({arg_str}) -> {result}'
-#
-#
-# def clock(fmt=DEFAULT_FMT):
-#
-#     def decorate(func):
-#         def clocked(*args, **kwargs):
-#             t0 = time.time()
-#             result = func(*args, **kwargs)
-#             elapsed = time.time() - t0
-#             name = func.__name__
-#             arg_1st = []
-#             if args:
-#                 arg_1st.append(', '.join(repr(arg) for arg in args))
-#             if kwargs:
-#                 pairs = ['%s=%r' % (k, w) for k, w in sorted(kwargs.items())]
-#                 arg_1st.append(', '.join(pairs))
-#             arg_str = ', '.join(arg_1st)
-#             print(fmt.format(**locals()))
-#             return result
-#         return clocked
-#
-#     return decorate
-#
-#
-# @clock()
-# def factorial(n):
-#     return 1 if n < 2 else n * factorial(n-1)
-#
-#
-# def factorial2(n):
-#     return 1 if n < 2 else n * factorial2(n-1)
-#
-# factorial2 = clock('{name}: {elapsed}s')(factorial2)
-#
-# print('6! =', factorial(6))
-#
-# print('6! =', factorial2(6))
+import time
+
+DEFAULT_FMT = '[{elapsed:0.8f}s] {name} ({arg_str}) -> {result}'
+
+
+def clock(fmt=DEFAULT_FMT):
+
+    def decorate(func):
+        def clocked(*args, **kwargs):
+            t0 = time.time()
+            result = func(*args, **kwargs)
+            elapsed = time.time() - t0
+            name = func.__name__
+            arg_1st = []
+            if args:
+                arg_1st.append(', '.join(repr(arg) for arg in args))
+            if kwargs:
+                pairs = ['%s=%r' % (k, w) for k, w in sorted(kwargs.items())]
+                arg_1st.append(', '.join(pairs))
+            arg_str = ', '.join(arg_1st)
+            print(fmt.format(**locals()))
+            return result
+        return clocked
+
+    return decorate
+
+
+@clock()
+def factorial(n):
+    if n < 2:
+        return n
+    return factorial(n-2) + factorial(n-1)
+
+
+def factorial2(n):
+    if n < 2:
+        return n
+    return factorial2(n-2) + factorial2(n-1)
+
+factorial2 = clock('{name}: {elapsed}s')(factorial2)
+
+print('6! =', factorial(6))
+
+print('6! =', factorial2(6))
 #
 #
 ###############################################################
