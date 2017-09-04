@@ -48,31 +48,9 @@ def counter(th_id, count):
 
 
 """
-    Формирование подкласса Thread и создание экземпляра подкласса
-"""
-#
-#
-# class MyThread(Thread):
-#     def __init__(self, func, args, name=''):
-#         Thread.__init__(self)
-#         self.func = func
-#         self.args = args
-#         self.name = name
-#
-#     def run(self):
-#         self.func(*self.args)
-#
-# th = MyThread(func=counter, args=(1, 5), name=counter.__name__)
-# th.start()
-# th.join()
-#
-# print('Main thread exiting.')
-###################################
-
-
-"""
     Формирование подкласса Thread и создание экземпляра подкласса.
     Добавлена возможность получить результат выполнения функции.
+    Добавлена функция callback
 """
 
 
@@ -83,20 +61,24 @@ def fib(n):
 
 
 class MyThread(Thread):
-    def __init__(self, func, args, name=''):
+    def __init__(self, func, args, name='', callback=None):
         Thread.__init__(self)
         self.func = func
         self.args = args
         self.name = name
+        self.callback = callback
 
     def run(self):
         self.result = self.func(*self.args)
+        if self.callback:
+            self.callback(self.result)
 
     def result(self):
         return self.result
 
 
-th = MyThread(func=fib, args=(10, ), name=fib.__name__)
+th = MyThread(func=fib, args=(10, ), name=fib.__name__,
+              callback=lambda r: print('callback. result: {}'.format(r)))
 th.start()
 th.join()
 
