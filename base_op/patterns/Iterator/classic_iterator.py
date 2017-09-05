@@ -66,20 +66,20 @@ class ListCollection(Aggregate):
 if __name__ == '__main__':
     collection = [1, 2, 5, 6, 8]
     aggregate = ListCollection(collection)
-    iter = aggregate.iterator()
+    itr = aggregate.iterator()
 
     while True:
         try:
-            iter.next()
+            itr.next()
         except StopIteration:
             break
-        print(iter.current())
+        print(itr.current())
 
-    iter.first()
+        itr.first()
 
     while True:
         try:
-            iter.next()
+            itr.next()
         except StopIteration:
             break
-        print(iter.current())
+        print(itr.current())
