@@ -4,9 +4,9 @@ import abc
 class Aggregate(abc.ABC):
 
     @abc.abstractmethod
-    def iterator(self):
+    def iterator(self) -> object:
         """
-        Возращает итератор
+        Возвращает  итератор
         """
         pass
 
@@ -19,7 +19,7 @@ class Iterator(abc.ABC):
     @abc.abstractmethod
     def first(self):
         """
-        Возращает итератор к началу агрегата.
+        Возвращает  итератор к началу агрегата.
         Так же называют reset
         """
         pass
@@ -52,7 +52,8 @@ class ListIterator(Iterator):
     def first(self):
         """
         Начальное значение курсора -1.
-        Так как в нашей реализации сначало небоходмо вызвать next который сдвинет курсор на 1.
+        Так как в нашей реализации сначала необходимо вызвать next
+         который сдвинет курсор на 1.
         """
         self._cursor = -1
 
@@ -81,7 +82,7 @@ class ListCollection(Aggregate):
 
 
 if __name__ == '__main__':
-    collection = [1, 2, 5, 6, 8]
+    collection = (1, 2, 5, 6, 8)
     aggregate = ListCollection(collection)
     itr = aggregate.iterator()
 

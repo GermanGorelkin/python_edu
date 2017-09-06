@@ -2,6 +2,8 @@ import collections.abc
 
 # collections.abc.Iterable
 # collections.abc.Iterator
+# collections.abc.Sequence
+# collections.abc.Callable
 
 
 class ListIterator(collections.abc.Iterator):
@@ -24,6 +26,21 @@ class ListCollection(collections.abc.Iterable):
         return ListIterator(self._collection, -1)
 
 
+class SomeIterable1(collections.abc.Iterable):
+    def __iter__(self):
+        pass
+
+class SomeIterable2:
+    def __iter__(self):
+        pass
+
+from string import ascii_letters
+
+class SomeIterable3:
+    def __getitem__(self, key):
+        return ascii_letters[key]
+
+
 if __name__ == '__main__':
     collection = [1, 2, 5, 6, 8]
     aggregate = ListCollection(collection)
@@ -39,3 +56,10 @@ if __name__ == '__main__':
             print(next(itr))
         except StopIteration:
             break
+
+
+    # print(isinstance(SomeIterable1(), collections.abc.Iterable))
+    # print(isinstance(SomeIterable2(), collections.abc.Iterable))
+    #
+    # for item in SomeIterable3():
+    #     print(item)
