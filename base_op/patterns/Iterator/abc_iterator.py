@@ -45,17 +45,25 @@ if __name__ == '__main__':
     collection = [1, 2, 5, 6, 8]
     aggregate = ListCollection(collection)
 
-    for item in aggregate:
-        print(item)
+    # for item in aggregate:
+    #     print(item)
+    #
+    # print("*" * 50)
+    #
+    # itr = iter(aggregate)
+    # while True:
+    #     try:
+    #         print(next(itr))
+    #     except StopIteration:
+    #         break
 
-    print("*" * 50)
+    # itr = iter(aggregate)
+    # while True:
+    #     item = next(itr, None)
+    #     if item is None:
+    #         break
+    #     print(item)
 
-    itr = iter(aggregate)
-    while True:
-        try:
-            print(next(itr))
-        except StopIteration:
-            break
 
 
     # print(isinstance(SomeIterable1(), collections.abc.Iterable))
