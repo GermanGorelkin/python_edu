@@ -18,7 +18,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as tcpServSock:
         tcpClisock, addr = tcpServSock.accept()
         print('...connected from:', addr)
 
-        try:
+        with tcpClisock:
             while True:
                 data = tcpClisock.recv(BUFSIZ)
                 if not data:
@@ -27,8 +27,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as tcpServSock:
                 print(data)
                 data = data.encode('utf-8')
                 tcpClisock.send(data)
-        except:
-            pass
-        finally:
-            tcpClisock.close()
 
