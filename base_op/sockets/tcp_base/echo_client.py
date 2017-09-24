@@ -12,7 +12,7 @@ with socket.socket() as tcpCliSock:
         data = input('> ')
         if not data:
             break
-        data = data.encode('utf-8')
+        data = (data+"\n").encode('utf-8')
         tcpCliSock.send(data)
 
         data = tcpCliSock.recv(BUFSIZ)
